@@ -80,7 +80,6 @@ interface IValidatorManager is IReconfigurableModule {
 
     event StakeCreditDeployed(address indexed validator, address stakeCreditAddress);
     event ValidatorInfoUpdated(address indexed validator, string field);
-    event RewardsCollected(uint256 amount, uint256 totalIncoming);
     event CommissionRateEdited(address indexed operatorAddress, uint64 newCommissionRate);
 
     // Role management events
@@ -90,10 +89,6 @@ interface IValidatorManager is IReconfigurableModule {
     event ValidatorJoinRequested(address indexed validator, uint256 votingPower, uint64 epoch);
     event ValidatorLeaveRequested(address indexed validator, uint64 epoch);
     event ValidatorStatusChanged(address indexed validator, uint8 oldStatus, uint8 newStatus, uint64 epoch);
-
-    // StakeReward events
-    event RewardsDistributed(address indexed validator, uint256 amount);
-    event RewardDistributeFailed(address indexed validator, string reason);
 
     /// Epoch transition events
     event ValidatorSetUpdated(
@@ -354,11 +349,6 @@ interface IValidatorManager is IReconfigurableModule {
     function getValidatorByProposer(
         bytes calldata proposer
     ) external view returns (address validatorAddress, uint64 validatorIndex);
-
-    /**
-     * @dev Block producer deposits block rewards
-     */
-    function deposit() external payable;
 
     /**
      * @dev Update validator's operator address

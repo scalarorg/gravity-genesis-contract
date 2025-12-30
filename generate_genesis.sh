@@ -250,7 +250,7 @@ main() {
     
     # Verify bytecode files were created
     log_info "Verifying bytecode files..."
-    expected_contracts=("System" "SystemReward" "StakeConfig" "ValidatorManager" "ValidatorPerformanceTracker" "EpochManager" "GovToken" "Timelock" "GravityGovernor" "JWKManager" "KeylessAccount" "Block" "Timestamp" "Genesis" "StakeCredit" "Delegation" "GovHub")
+    expected_contracts=("System" "StakeConfig" "ValidatorManager" "ValidatorPerformanceTracker" "EpochManager" "GovToken" "Timelock" "GravityGovernor" "JWKManager" "KeylessAccount" "Block" "Timestamp" "Genesis" "StakeCredit" "Delegation" "GovHub")
     
     for contract in "${expected_contracts[@]}"; do
         if [ ! -f "out/${contract}.hex" ]; then
@@ -266,7 +266,7 @@ main() {
     create_directory "output"
     
     log_info "Running gravity-genesis binary..."
-    cargo run --release --bin gravity-genesis -- --byte-code-dir out --config-file generate/genesis_config.json --output output --log-file output/genesis_generation.log
+    cargo run --release --bin gravity-genesis -- --byte-code-dir out --config-file generate/genesis_config.json --oidc-providers-file generate/jwks_provider.json --output output --log-file output/genesis_generation.log
     check_result "genesis generation"
     
     # Verify output files

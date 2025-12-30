@@ -41,9 +41,8 @@ pub const HASH_ORACLE_ADDR: Address = address!("00000000000000000000000000000000
 // this address is used to call evm. It's not used for gravity pre compile contract
 pub const SYSTEM_CALLER: Address = address!("0000000000000000000000000000000000002000");
 
-pub const CONTRACTS: [(&str, Address); 22] = [
+pub const CONTRACTS: [(&str, Address); 21] = [
     ("System", SYSTEM_CONTRACT_ADDRESS),
-    ("SystemReward", SYSTEM_REWARD_ADDR),
     ("StakeConfig", STAKE_CONFIG_ADDR),
     ("ValidatorManagerUtils", VALIDATOR_MANAGER_UTILS_ADDR),
     ("ValidatorManager", VALIDATOR_MANAGER_ADDR),

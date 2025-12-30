@@ -52,9 +52,6 @@ contract StakeConfigTest is Test, TestConstants {
         // Assert commission parameters
         assertEq(stakeConfig.maxCommissionRate(), 5000);
         assertEq(stakeConfig.maxCommissionChangeRate(), 500);
-
-        // Assert lock amount
-        assertEq(stakeConfig.lockAmount(), 10000 ether);
     } */
 
     function test_initialize_cannotBeCalledTwice() public {
@@ -233,30 +230,6 @@ contract StakeConfigTest is Test, TestConstants {
         stakeConfig.updateParam("votingPowerIncreaseLimit", encodedValue);
     }
 
-    function test_updateParam_lockAmount_shouldWork() public {
-        // Arrange
-        uint256 newValue = 20000 ether;
-        bytes memory encodedValue = abi.encode(newValue);
-
-        // Act
-        vm.prank(GOV_HUB_ADDR);
-        stakeConfig.updateParam("lockAmount", encodedValue);
-
-        // Assert
-        assertEq(stakeConfig.lockAmount(), newValue);
-    }
-
-    function test_updateParam_lockAmount_shouldRevertIfZero() public {
-        // Arrange
-        uint256 newValue = 0;
-        bytes memory encodedValue = abi.encode(newValue);
-
-        // Act & Assert
-        vm.prank(GOV_HUB_ADDR);
-        vm.expectRevert(abi.encodeWithSelector(IStakeConfig.StakeConfig__InvalidLockAmount.selector, newValue));
-        stakeConfig.updateParam("lockAmount", encodedValue);
-    }
-
     function test_updateParam_unknownParam_shouldRevert() public {
         // Arrange
         bytes memory encodedValue = abi.encode(uint256(100));
@@ -317,7 +290,6 @@ contract StakeConfigTest is Test, TestConstants {
         assertEq(params.maxCommissionRate, 5000);
         assertEq(params.maxCommissionChangeRate, 500);
         assertEq(params.redelegateFeeRate, 2);
-        assertEq(params.lockAmount, 10000 ether);
     } */
 
     // TODO: failed because stakeconfig init set minValidatorStake to 0

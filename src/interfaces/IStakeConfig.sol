@@ -15,7 +15,6 @@ interface IStakeConfig {
     error StakeConfig__InvalidVotingPowerIncreaseLimit(uint256 actualValue, uint256 maxValue);
     error StakeConfig__ParameterNotFound(string paramName);
     error StakeConfig__InvalidCommissionRate(uint256 rate, uint256 maxRate);
-    error StakeConfig__InvalidLockAmount(uint256 providedAmount);
 
     // Events
     event ConfigParamUpdated(string parameter, uint256 oldValue, uint256 newValue);
@@ -100,12 +99,6 @@ interface IStakeConfig {
     function maxCommissionChangeRate() external view returns (uint256);
 
     /**
-     * @dev Returns the amount that must be locked when creating a validator
-     * @return Lock amount
-     */
-    function lockAmount() external view returns (uint256);
-
-    /**
      * @dev Returns the percentage base used for calculations (100% representation)
      * @return Percentage base value
      */
@@ -175,7 +168,6 @@ interface IStakeConfig {
         uint256 maxCommissionRate;
         uint256 maxCommissionChangeRate;
         uint256 redelegateFeeRate;
-        uint256 lockAmount;
     }
 
     /**

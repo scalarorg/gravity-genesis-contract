@@ -17,7 +17,7 @@ interface IStakeCredit {
     error InsufficientBalance();
     error TransferFailed();
     error NoWithdrawableAmount();
-    error StakeCredit__WrongInitContext(uint256 initialAmount, uint256 lockAmount, address validator);
+    error StakeCredit__WrongInitContext(uint256 initialAmount, uint256 reserved, address validator);
     error InsufficientActiveStake();
     error StakeCredit__UnauthorizedCaller();
     error StakeCredit__RequestExists();
@@ -102,25 +102,10 @@ interface IStakeCredit {
     ) external returns (uint256 gAmount);
 
     /**
-     * @dev Distribute rewards to the stake pool
-     * @param commissionRate The commission rate (base: 10000)
-     */
-    function distributeReward(
-        uint64 commissionRate
-    ) external payable;
-
-    /**
      * @dev Process epoch transition
      */
     function onNewEpoch() external;
 
-    /**
-     * @dev Update the beneficiary address
-     * @param newBeneficiary The new beneficiary address
-     */
-    function updateBeneficiary(
-        address newBeneficiary
-    ) external;
 
     /**
      * @dev Claim unlocked stake after unbonding period
@@ -190,44 +175,11 @@ interface IStakeCredit {
     function validator() external view returns (address);
 
     /**
-     * @dev Get the commission beneficiary address
-     * @return Commission beneficiary address
-     */
-    function commissionBeneficiary() external view returns (address);
-
-    /**
-     * @dev Get the reward record for a specific day
-     * @param day The day index (timestamp / 86400)
-     * @return Reward amount for the specified day
-     */
-    function rewardRecord(
-        uint256 day
-    ) external view returns (uint256);
-
-    /**
-     * @dev Get the total pooled G record for a specific day
-     * @param day The day index (timestamp / 86400)
-     * @return Total pooled G amount for the specified day
-     */
-    function totalPooledGRecord(
-        uint256 day
-    ) external view returns (uint256);
-
-    /**
      * @dev Get the current unlock request status
      * @return hasRequest Whether there is an active unlock request
      * @return requestedAt The timestamp when the request was created
      */
     function getUnlockRequestStatus() external view returns (bool hasRequest, uint256 requestedAt);
-
-    /**
-     * @dev Convert shares to G amount
-     * @param shares The number of shares
-     * @return The corresponding G amount
-     */
-    function getPooledGByShares(
-        uint256 shares
-    ) external view returns (uint256);
 
     /**
      * @dev Get the G amount owned by a delegator
@@ -236,15 +188,6 @@ interface IStakeCredit {
      */
     function getPooledGByDelegator(
         address delegator
-    ) external view returns (uint256);
-
-    /**
-     * @dev Convert G amount to shares
-     * @param gAmount The G amount
-     * @return The corresponding number of shares
-     */
-    function getSharesByPooledG(
-        uint256 gAmount
     ) external view returns (uint256);
 
     /**
