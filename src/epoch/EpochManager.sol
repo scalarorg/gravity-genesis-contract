@@ -47,7 +47,7 @@ contract EpochManager is System, Protectable, IParamSubscriber, IEpochManager, I
     /// @inheritdoc IEpochManager
     function initialize() external initializer onlyGenesis {
         currentEpoch = 0;
-        // epochIntervalMicrosecs = 2 hours * 1_000_000;
+        // epochIntervalMicrosecs = 7200000000;
         epochIntervalMicrosecs = 7200000000;
         lastEpochTransitionTime = ITimestamp(TIMESTAMP_ADDR).nowSeconds();
     }

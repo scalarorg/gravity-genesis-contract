@@ -48,7 +48,7 @@ contract TestConstants {
     uint64 public constant DEFAULT_COMMISSION_RATE = 1000; // 10%
     uint64 public constant MAX_COMMISSION_RATE = 5000; // 50%
     uint64 public constant DEFAULT_VALIDATOR_INDEX = 1;
-    uint256 public constant DEFAULT_TIMESTAMP_MICROS = 1000000;
+    uint64 public constant DEFAULT_TIMESTAMP_MICROS = 1000000;
 
     // ======== Gas Values for Testing ========
     uint256 public constant DEFAULT_GAS_LIMIT = 300000;

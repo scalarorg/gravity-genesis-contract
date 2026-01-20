@@ -39,7 +39,7 @@ interface IBlock {
     function blockPrologue(
         bytes calldata proposer,
         uint64[] calldata failedProposerIndices,
-        uint256 timestampMicros
+        uint64 timestampMicros
     ) external;
 
     /**
@@ -58,6 +58,6 @@ interface IBlock {
     function blockPrologueExt(
         bytes calldata proposer,
         uint64[] calldata failedProposerIndices,
-        uint256 timestampMicros
+        uint64 timestampMicros
     ) external;
 }

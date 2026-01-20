@@ -20,7 +20,7 @@ contract Block is System, IBlock, Initializable {
     function blockPrologue(
         bytes calldata proposer,
         uint64[] calldata failedProposerIndices,
-        uint256 timestampMicros
+        uint64 timestampMicros
     ) external onlySystemCaller {
         // Check if proposer is VM reserved address (32 bytes of zeros)
         bytes32 vmReservedProposer = bytes32(0);
@@ -57,7 +57,7 @@ contract Block is System, IBlock, Initializable {
     function blockPrologueExt(
         bytes calldata proposer,
         uint64[] calldata failedProposerIndices,
-        uint256 timestampMicros
+        uint64 timestampMicros
     ) external onlySystemCaller {
         // Check if proposer is VM reserved address (32 bytes of zeros)
         bytes32 vmReservedProposer = bytes32(0);

@@ -99,7 +99,7 @@ contract BlockTest is Test, TestConstants {
         vm.startPrank(SYSTEM_CALLER);
         uint64[] memory failedIndices = new uint64[](1);
         failedIndices[0] = 5;
-        uint256 timestampMicros = 2000000;
+        uint64 timestampMicros = 2000000;
 
         // Act
         blockContract.blockPrologue(getVmReservedProposer(), failedIndices, timestampMicros);
